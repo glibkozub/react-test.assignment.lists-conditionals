@@ -15,16 +15,25 @@ class App extends Component {
     });
   };
 
+  removeClickedElement = (charIndex) => {
+    let newCharsArray = [...this.state.inputText];
+    newCharsArray.splice(charIndex, 1);
+
+    this.setState({
+      inputText: newCharsArray.join(''),
+    });
+  };
+
   render() {
-    const chars = [...this.state.inputText]
+    const Chars = [...this.state.inputText]
       .filter(char => char !== ' ')
-      .map(char => <CharComponent char={char}/>);
+      .map((char, i) => <CharComponent key={i} char={char} removeClickedElement={() => this.removeClickedElement(i)} />);
 
     return (
       <div className="App">
         <input type="text" value={this.state.inputText} onChange={this.onChangeHandler.bind(this)} />
         <ValidationComponent textLength={this.state.inputText.length} />
-        {chars}
+        {Chars}
       </div>
     );
   }
