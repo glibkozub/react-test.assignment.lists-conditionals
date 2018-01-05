@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import ValidationComponent from './ValidationComponent';
 
 class App extends Component {
   state = {
-    inputText: '',
+    inputText: 'placeholder data',
   };
 
   onChangeHandler = (e) => {
-    // let newState = [...this.state];
     this.setState({
       inputText: e.target.value,
     });
@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div className="App">
         <input type="text" value={this.state.inputText} onChange={this.onChangeHandler.bind(this)} />
-        <p>{this.state.inputText}</p>
+        <ValidationComponent textLength={this.state.inputText.length}/>
       </div>
     );
   }
